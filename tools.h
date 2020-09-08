@@ -6,10 +6,10 @@
 using std::string;
 using std::vector;
 
-const char START_COL	= 'a';
-const char END_COL		= 'h';
-const char START_ROW	= '1';
-const char END_ROW		= '8';
+extern const char START_COL;
+extern const char END_COL;
+extern const char START_ROW;
+extern const char END_ROW;
 
 struct ePosition
 {
@@ -24,7 +24,7 @@ struct ePosition
 	ePosition& operator=(ePosition&&)		= default;
 
 	bool IsValid()		const { return col >= START_COL && col <= END_COL && row >= START_ROW && row <= END_ROW; }
-	std::string Dump()	const { std::string t; t += col; t += row; return t; }
+	std::string Dump()	const;
 
 	int XToBoard()	const { return col - START_COL; }
 	int YToBoard()	const { return row - START_ROW; }
@@ -34,8 +34,8 @@ struct ePosition
 	bool operator>(const ePosition& pos)	const { return Dump() > pos.Dump(); }
 	bool operator!=(const ePosition& pos)	const { return !operator==(pos); }
 
-	char col = 0; //a-h
-	char row = 0; //1-8
+	char col = 0;
+	char row = 0;
 };
 
 

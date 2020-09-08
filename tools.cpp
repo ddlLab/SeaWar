@@ -1,5 +1,28 @@
 #include "tools.h"
 
+
+const char START_COL	= 'a';
+const char END_COL		= 'j';
+const char START_ROW	= '0';
+const char END_ROW		= '9';
+
+std::string ePosition::Dump()	const 
+{
+	std::string t;
+	t += col;
+
+	if (row == END_ROW)
+	{
+		t += "10";
+	}
+	else
+	{
+		t += (row + 1);
+	}
+	return t;
+}
+
+
 void GetTraektory(const ePosition& _from, const ePosition& _to, vector<ePosition>& _traektory)
 {
 	_traektory.clear();
