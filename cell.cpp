@@ -1,4 +1,4 @@
-#include "cell.h"
+﻿#include "cell.h"
 #include <sstream>
 
 //-----------------------------------------------------------------------
@@ -10,7 +10,7 @@ eCell::eCell(const ePosition& _pos)
 string eCell::Dump() const
 {
 	std::stringstream res;
-	res << "cellType:" << ToString(cellType)
+	res << "cellType:" << cellType
 		<< ", pos: "   << pos.Dump();
 	return res.str();
 }
