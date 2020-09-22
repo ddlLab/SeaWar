@@ -155,6 +155,8 @@
     <ClCompile Include="tools.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cells.h" />
+    <ClInclude Include="enums.h" />
     <ClInclude Include="token.h" />
     <ClInclude Include="tools.h" />
     <ClInclude Include="types.h" />
