@@ -4,13 +4,15 @@
 #include <iostream>
 #include<conio.h>
 #include <array>
-#include "tools.h"
-#include "types.h"
+#include "cell.h"
 
 using namespace std;
 
 int main()
 {
+	eCell  cell({ 3,3 });
+	cout << cell.Dump() << endl;
+
 	std::array<std::array<int, 10>, 10> myarray;
 
 	for (auto& col : myarray)

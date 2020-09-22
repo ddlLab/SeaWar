@@ -18,7 +18,7 @@ struct eToken
 		   ePosition		_from, 
 		   ePosition		_to)
 		: type(_type)
-		, value(ToString(eCommands::MOVE))
+//		, value(ToString(eCommands::MOVE))
 		, from(_from)
 		, to(_to)
 	{}

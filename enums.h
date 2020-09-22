@@ -1,18 +1,14 @@
 #pragma once
-#include <string>
-using namespace std;
 
-enum class eCellType
-{
+#include "types.h"
+
+DECLARE_ENUM_CLASS(eCellType,
 	EMPTY,
 	ALIVE,
 	HITTED,
 	MISSED
-}; 
+); 
 
-enum class eTokenType
-{
+DECLARE_ENUM_CLASS(eTokenType,
 	COMMAND,
-	POSSITION,
-	UNKNOWN
-};
+	POSSITION);
