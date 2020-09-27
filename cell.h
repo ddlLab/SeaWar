@@ -3,6 +3,10 @@
 #include "enums.h"
 #include "tools.h"
 #include <vector>
+#include <memory>
+
+using std::vector;
+using std::shared_ptr;
 
 class eShip;
 
@@ -18,7 +22,7 @@ public:
 	eCell&				operator=(const eCell&)	= default;
 	eCell&				operator=(eCell&&)		= default;
 
-//	void				Register(eShip*);
+	void				Register(eShip*);
 //	void				UnRegister(eShip*);
 
 	string				Dump()					const;
@@ -37,3 +41,5 @@ private:
 	ePosition	pos;
 	
 };
+
+using eCells = vector<shared_ptr<eCell>>;

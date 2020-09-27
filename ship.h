@@ -1,7 +1,6 @@
 #pragma once
 #include "enums.h"
 #include "tools.h"
-#include <vector>
 #include "cell.h"
   
 class eCell;
@@ -9,17 +8,22 @@ class eCell;
 class eShip
 {
 public:
-	std::vector<eCell>  cells();
-	std::string			Dump()			const;
+	string				Dump()			const;
+	bool				IsValid()		const;
 
-	bool				ShipIsAlive()   const		{ return shipStatus == eShipStatus::ALIVE; };
-	bool				ShipIsDead()    const		{ return shipStatus == eShipStatus::DEAD; };
-	bool				AddCell()	    const		{ return shipStatus == eShipStatus::PREPARED; };
-	bool				CanAddCell();
-	bool				Start()		    const		{ return shipStatus == eShipStatus::ALIVE; };
+	bool				IsPrepared()	const		{ return shipStatus == eShipStatus::PREPARED; };
+	bool				IsAlive()		const		{ return shipStatus == eShipStatus::ALIVE; };
+	bool				IsDead()		const		{ return shipStatus == eShipStatus::DEAD; };
 
-	void				OnHitted()		const		{ return pos; };
+	bool				AddCell(shared_ptr<eCell>); //{ return shipStatus == eShipStatus::PREPARED; };
+	bool				Start();					//{ return shipStatus == eShipStatus::ALIVE; };
+
+	bool				OnHitted(shared_ptr<eCell>)	  const;
 private:
+	void				CheckStatus();
+	bool				CanAddCell(const eCell& cell) const;
+
 	eShipStatus shipStatus = eShipStatus::INVALID;
+	eCells		cells;
 };
 
