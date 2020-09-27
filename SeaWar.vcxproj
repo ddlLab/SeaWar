@@ -153,13 +153,16 @@
   <ItemGroup>
     <ClCompile Include="cell.cpp" />
     <ClCompile Include="SeaWar.cpp" />
+    <ClCompile Include="ship.cpp" />
     <ClCompile Include="tools.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cell.h" />
     <ClInclude Include="enums.h" />
+    <ClInclude Include="ship.h" />
     <ClInclude Include="tools.h" />
     <ClInclude Include="types.h" />
+    <ClInclude Include="vector_tools.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

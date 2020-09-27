@@ -4,11 +4,14 @@
     <ClCompile Include="SeaWar.cpp" />
     <ClCompile Include="tools.cpp" />
     <ClCompile Include="cell.cpp" />
+    <ClCompile Include="ship.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tools.h" />
     <ClInclude Include="types.h" />
     <ClInclude Include="enums.h" />
     <ClInclude Include="cell.h" />
+    <ClInclude Include="ship.h" />
+    <ClInclude Include="vector_tools.h" />
   </ItemGroup>
 </Project>
