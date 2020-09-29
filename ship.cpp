@@ -8,7 +8,7 @@ string eShip::Dump() const
 {
 	std::stringstream res;
 	res << "shipStatus:" << shipStatus
-		<< ", cells: " << DumpTotalPtr(cells);
+		<< ", cells: " << DumpTotal(cells);
 	return res.str();
 }
 //-----------------------------------------------------------------------
@@ -25,7 +25,7 @@ bool eShip::AddCell(shared_ptr<eCell> _cell)
 	if (CanAddCell (*_cell))
 	{
 		cells.emplace_back(_cell);
-		_cell->Register(this);
+//		_cell->Register(this);
 		return true;
 	}
 	return false;

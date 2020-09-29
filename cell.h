@@ -22,7 +22,7 @@ public:
 	eCell&				operator=(const eCell&)	= default;
 	eCell&				operator=(eCell&&)		= default;
 
-	void				Register(eShip*);
+//	void				Register(eShip*);
 //	void				UnRegister(eShip*);
 
 	string				Dump()					const;

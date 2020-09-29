@@ -5,11 +5,28 @@
 #include<conio.h>
 #include <array>
 #include "cell.h"
+#include "vector_tools.h"
 
 using namespace std;
 
 int main()
 {
+	vector<eCell> test;
+	test.emplace_back(eCell({ 3,5 }));
+	test.emplace_back(eCell({ 3,4 }));
+	test.emplace_back(eCell({ 3,3 }));
+	test.emplace_back(eCell({ 3,2 }));
+	test.emplace_back(eCell({ 3,1 }));
+	vector<eCell*> test1;
+	test1.emplace_back(new eCell({5,3}));
+	test1.emplace_back(new eCell({4,3}));
+	test1.emplace_back(new eCell({3,3}));
+	test1.emplace_back(new eCell({2,3}));
+	test1.emplace_back(new eCell({1,3}));
+
+	cout << "test:" << DumpTotal(test) << endl;
+	cout << "test1:" << DumpTotal(test1) << endl;
+	/*
 	eCell  cell({ 3,3 });
 	cout << cell.Dump() << endl;
 
@@ -62,5 +79,5 @@ int main()
 		}
 
 
-	}
+	}*/
 }

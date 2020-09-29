@@ -13,5 +13,6 @@
     <ClInclude Include="cell.h" />
     <ClInclude Include="ship.h" />
     <ClInclude Include="vector_tools.h" />
+    <ClInclude Include="sfinae_types.h" />
   </ItemGroup>
 </Project>
