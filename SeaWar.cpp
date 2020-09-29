@@ -2,7 +2,7 @@
 //
 
 #include <iostream>
-#include<conio.h>
+#include <conio.h>
 #include <array>
 #include "cell.h"
 #include "vector_tools.h"
@@ -26,6 +26,11 @@ int main()
 
 	cout << "test:" << DumpTotal(test) << endl;
 	cout << "test1:" << DumpTotal(test1) << endl;
+
+
+	cout << "test:" << IsValidTotal(test) << endl;
+
+	cout << "test1:" << IsValidTotal(test1) << endl;
 	/*
 	eCell  cell({ 3,3 });
 	cout << cell.Dump() << endl;

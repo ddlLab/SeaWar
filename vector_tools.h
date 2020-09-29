@@ -44,7 +44,8 @@ DumpTotal(const vector<T>& _items, const string& sep = ",")
 }
 
 template<class T>
-bool IsValidTotal(const vector<T>& _items)
+typename std::enable_if<!is_pointer_type<T>::value, bool>::type
+ IsValidTotal(const vector<T>& _items)
 {
 	for (const T& i : _items)
 	{
@@ -55,7 +56,8 @@ bool IsValidTotal(const vector<T>& _items)
 }
 
 template<class T>
-bool IsValidTotalPtr(const vector<T>& _items)
+typename std::enable_if<is_pointer_type<T>::value, bool>::type
+ IsValidTotal(const vector<T>& _items)
 {
 	for (const T& i : _items)
 	{

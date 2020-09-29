@@ -15,7 +15,7 @@ string eShip::Dump() const
 bool eShip::IsValid() const
 {
 	return IsValidEnum(shipStatus) 
-		&& IsValidTotalPtr(cells)
+		&& IsValidTotal(cells)
 		&& cells.size() <= 4
 		&& !cells.empty();
 }
