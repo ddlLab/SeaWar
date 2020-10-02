@@ -21,11 +21,13 @@ public:
 
 	eCell&				operator=(const eCell&)	= default;
 	eCell&				operator=(eCell&&)		= default;
-
-//	void				Register(eShip*);
-//	void				UnRegister(eShip*);
+	//todo: alex
+	void				Register(eShip*);	//set up param ship and change cellType to Alive
+	void				UnRegister(eShip*); //reset param ship and change cellType to EMPTY
 
 	string				Dump()					const;
+//switch case by cellType and return one char which visin state. for example ALIVE - S HiTTEd - X
+	string				ShortDump()				const;
 	bool				IsValid()				const;
 
 	void				OnHitted();
@@ -43,3 +45,10 @@ private:
 };
 
 using eCells = vector<shared_ptr<eCell>>;
+
+//todo: alex
+//create class Board and its methods;
+//Board must have member enum status Perepared|Starting|Started|Finished
+//Board must have member Cells and generate them
+//Board must have member Ships
+//Board must have methods ToString and CanStart() which check can we change state Perepared->Starting

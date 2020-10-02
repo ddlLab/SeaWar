@@ -22,12 +22,14 @@ bool eShip::IsValid() const
 //-----------------------------------------------------------------------
 bool eShip::AddCell(shared_ptr<eCell> _cell)
 {
-	if (CanAddCell (*_cell))
+	if (CanAddCell(*_cell))
 	{
 		cells.emplace_back(_cell);
-//		_cell->Register(this);
+		_cell->Register(this);
 		return true;
 	}
+	//if cannot add cell unregister cells and clear after call AddCell //Create method 
+
 	return false;
 }
 //-----------------------------------------------------------------------
@@ -78,10 +80,9 @@ bool eShip::CanAddCell(const eCell& _cell) const
 		bool canAdd = true;
 		if (!cells.empty())
 		{
-			for (shared_ptr<eCell> c : cells)
-			{
-				//todo::dima
-			}
+			//check isHorizontal or isVertical
+			//sort cells(use http://www.cplusplus.com/reference/algorithm/  sort)
+			//check diff status
 		}
 		return canAdd;
 	}
