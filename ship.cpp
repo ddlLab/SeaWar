@@ -4,6 +4,20 @@
 #include <algorithm>
 
 //-----------------------------------------------------------------------
+eShip::~eShip()
+{
+	UnRegisterCells();
+}
+//-----------------------------------------------------------------------
+void eShip::UnRegisterCells() 
+{
+	for (shared_ptr<eCell> cell : cells)
+	{
+		cell->UnRegister(this);
+	}
+	cells.clear();
+}
+//-----------------------------------------------------------------------
 string eShip::Dump() const
 {
 	std::stringstream res;
@@ -28,8 +42,7 @@ bool eShip::AddCell(shared_ptr<eCell> _cell)
 		_cell->Register(this);
 		return true;
 	}
-	//if cannot add cell unregister cells and clear after call AddCell //Create method 
-
+	UnRegisterCells();
 	return false;
 }
 //-----------------------------------------------------------------------
@@ -73,16 +86,33 @@ void eShip::CheckStatus()
 }
 //-----------------------------------------------------------------------
 bool eShip::CanAddCell(const eCell& _cell) const
-{
+{	
 	if (shipStatus == eShipStatus::PREPARED
-		&& _cell.IsEmpty())
+		&& _cell.IsEmpty()
+		&& cells.size() < 4)
 	{
 		bool canAdd = true;
 		if (!cells.empty())
 		{
-			//check isHorizontal or isVertical
-			//sort cells(use http://www.cplusplus.com/reference/algorithm/  sort)
-			//check diff status
+			ePosition minCell = cells[0]->Position();
+			ePosition maxCell = cells[0]->Position();
+			for (shared_ptr<const eCell> cell : cells)
+			{
+				if (minCell >= cell->Position())
+				{
+					minCell = cell->Position();
+				}
+				if (maxCell <= cell->Position())
+				{
+					maxCell = cell->Position();
+				}
+			}
+			
+			int diffX = abs(maxCell.col - minCell.col);
+			int diffY = abs(maxCell.row - minCell.row);
+			
+			canAdd = (diffX == 0 && diffY + 1 < cells.size) 
+				  || (diffY == 0 && diffX + 1 < cells.size);
 		}
 		return canAdd;
 	}

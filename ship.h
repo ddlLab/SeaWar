@@ -8,6 +8,9 @@ class eCell;
 class eShip
 {
 public:
+	eShip() = default;
+	~eShip();
+
 	string				Dump()			const;
 	bool				IsValid()		const;
 
@@ -22,6 +25,7 @@ public:
 private:
 	void				CheckStatus();
 	bool				CanAddCell(const eCell& cell) const;
+	void				UnRegisterCells();
 
 	eShipStatus shipStatus = eShipStatus::INVALID;
 	eCells		cells;
