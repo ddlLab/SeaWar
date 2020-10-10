@@ -30,8 +30,10 @@ struct ePosition
 	int YToBoard()	const { return row - START_ROW; }
 
 	bool operator==(const ePosition& pos)	const { return col == pos.col && row == pos.row; }
-	bool operator<(const ePosition& pos)	const { return Dump() < pos.Dump(); }
-	bool operator>(const ePosition& pos)	const { return Dump() > pos.Dump(); }
+	bool operator<(const ePosition& pos)	const { return col < pos.col && row < pos.row; }
+	bool operator>=(const ePosition& pos)	const { return !operator<(pos); }
+	bool operator>(const ePosition& pos)	const { return col > pos.col && row > pos.row; }
+	bool operator<=(const ePosition& pos)	const { return !operator>(pos); }
 	bool operator!=(const ePosition& pos)	const { return !operator==(pos); }
 
 	char col = 0;

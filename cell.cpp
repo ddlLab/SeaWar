@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------
 eCell::eCell(const ePosition& _pos)
 : pos(_pos)
-, cellType(eCellType::ALIVE)
+, cellType(eCellType::EMPTY)
 {}
 //-----------------------------------------------------------------------
 void eCell::Register(eShip*_ship)

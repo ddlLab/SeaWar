@@ -111,8 +111,8 @@ bool eShip::CanAddCell(const eCell& _cell) const
 			int diffX = abs(maxCell.col - minCell.col);
 			int diffY = abs(maxCell.row - minCell.row);
 			
-			canAdd = (diffX == 0 && diffY + 1 < cells.size) 
-				  || (diffY == 0 && diffX + 1 < cells.size);
+			canAdd = (diffX == 0 && diffY + 1 < cells.size()) 
+				  || (diffY == 0 && diffX + 1 < cells.size());
 		}
 		return canAdd;
 	}
