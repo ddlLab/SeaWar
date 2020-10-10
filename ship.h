@@ -27,3 +27,5 @@ private:
 	eCells		cells;
 };
 
+using eShips = vector<shared_ptr<eShip>>;
+

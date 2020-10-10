@@ -5,13 +5,16 @@
 #include <conio.h>
 #include <array>
 #include "cell.h"
+#include "board.h"
 #include "vector_tools.h"
 
 using namespace std;
 
 int main()
 {
-	vector<eCell> test;
+	eBoard board;
+	cout << board.ShortDump() << endl;
+	/*vector<eCell> test;
 	test.emplace_back(eCell({ 3,5 }));
 	test.emplace_back(eCell({ 3,4 }));
 	test.emplace_back(eCell({ 3,3 }));
@@ -31,7 +34,7 @@ int main()
 	cout << "test:" << IsValidTotal(test) << endl;
 
 	cout << "test1:" << IsValidTotal(test1) << endl;
-	/*
+	*//*
 	eCell  cell({ 3,3 });
 	cout << cell.Dump() << endl;
 

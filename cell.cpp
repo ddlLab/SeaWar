@@ -4,8 +4,20 @@
 //-----------------------------------------------------------------------
 eCell::eCell(const ePosition& _pos)
 : pos(_pos)
-, cellType(eCellType::EMPTY)
+, cellType(eCellType::ALIVE)
 {}
+//-----------------------------------------------------------------------
+void eCell::Register(eShip*_ship)
+{
+	cellType = eCellType::ALIVE;
+	ship = _ship;
+}
+//-----------------------------------------------------------------------
+void eCell::UnRegister(eShip *)
+{
+	ship = nullptr;
+	cellType = eCellType::EMPTY;
+}
 //-----------------------------------------------------------------------
 string eCell::Dump() const
 {
@@ -13,6 +25,18 @@ string eCell::Dump() const
 	res << "cellType:" << cellType
 		<< ", pos: "   << pos.Dump();
 	return res.str();
+}
+//-----------------------------------------------------------------------
+string eCell::ShortDump() const
+{
+	switch (cellType)
+	{
+	case eCellType::ALIVE: return  "O";
+	case eCellType::EMPTY: return  "~";
+	case eCellType::HITTED:return  "X";
+	case eCellType::MISSED:return  "*";
+	}
+	return"";
 }
 //-----------------------------------------------------------------------
 bool eCell::IsValid() const

@@ -5,6 +5,7 @@
     <ClCompile Include="tools.cpp" />
     <ClCompile Include="cell.cpp" />
     <ClCompile Include="ship.cpp" />
+    <ClCompile Include="Board.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tools.h" />
@@ -14,5 +15,6 @@
     <ClInclude Include="ship.h" />
     <ClInclude Include="vector_tools.h" />
     <ClInclude Include="sfinae_types.h" />
+    <ClInclude Include="Board.h" />
   </ItemGroup>
 </Project>
