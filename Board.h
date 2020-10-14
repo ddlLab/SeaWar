@@ -17,11 +17,23 @@ public:
 	bool				IsFinished()				const { return status == eGameStatus::FINISHED;  };
 	bool				CanStart()					const;
 
+//todo : dima see as example ship
+	bool				AddShip(shared_ptr<eShip>);
+	bool				Start();
+
+
 	string				Dump()						const;
-	string				ShortDump()						const;
+	string				ShortDump()					const;
 
 private:
+//todo : dima see as example ship
+//todo : sasha 
+	bool				CanAddShip(const eShip& cell) const;
 
 	eGameStatus	status = eGameStatus::INVALID;
 	eShips ships;
 };
+
+//todo: sasha create class User which contains two Boards, and user name. you can add other optional fields
+//todo: sasha create class Game which contains two Users
+//please thinking  about methods about this two classes and start create method interfaces and release it

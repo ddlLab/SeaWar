@@ -21,6 +21,10 @@ public:
 	bool				AddCell(shared_ptr<eCell>); //{ return shipStatus == eShipStatus::PREPARED; };
 	bool				Start();					//{ return shipStatus == eShipStatus::ALIVE; };
 
+//todo : dima see as example cell
+	void				Register(eBoard*);
+	void				UnRegister(eBoard*);
+
 	bool				OnHitted(shared_ptr<eCell>)	  const;
 private:
 	void				CheckStatus();
@@ -29,6 +33,7 @@ private:
 
 	eShipStatus shipStatus = eShipStatus::INVALID;
 	eCells		cells;
+	eBoard*		board = nullptr;
 };
 
 using eShips = vector<shared_ptr<eShip>>;
