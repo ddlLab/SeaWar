@@ -2,6 +2,21 @@
 #include <sstream>
 
 
+//-----------------------------------------------------------------------
+eBoard::~eBoard()
+{
+	UnRegisterShip();
+}
+//-----------------------------------------------------------------------
+void eBoard::UnRegisterShip()
+{
+	for (shared_ptr<eShip> ship : ships)
+	{
+		ship->UnRegister(this);
+	}
+	ships.clear();
+}
+//-----------------------------------------------------------------------
 eBoard::eBoard()
 :status(eGameStatus::PREPARING)
 {
@@ -14,12 +29,12 @@ eBoard::eBoard()
 		}
 	}
 }
-
+//-----------------------------------------------------------------------
 bool eBoard::CanStart() const
 {
 	return ships.size()==10;
 }
-
+//-----------------------------------------------------------------------
 string eBoard::Dump() const
 {
 	std::stringstream os;
@@ -31,7 +46,7 @@ string eBoard::Dump() const
 	os << "]";
 	return os.str();
 }
-
+//-----------------------------------------------------------------------
 string eBoard::ShortDump() const
 {
 	int i=0;
@@ -48,4 +63,45 @@ string eBoard::ShortDump() const
 
 	}
 	return os.str();
+}
+//-----------------------------------------------------------------------
+bool eBoard::AddShip(shared_ptr<eShip> _ship)
+{
+	if (CanAddShip(*_ship))
+	{
+		ships.emplace_back(_ship);
+		_ship->Register(this);
+		return true;
+	}
+	UnRegisterShip();
+	return false;
+}
+//-----------------------------------------------------------------------
+bool eBoard::CanAddShip(const eShip&  _ship) const
+{
+	if (gameStatus == eGameStatus::PREPARING
+		/*&& number of ships*/
+		&& _ship.IsPrepared()
+		&& ships.size() < ships.max_size())
+	{
+		bool canAdd = true;
+			
+
+
+
+
+		return canAdd;
+	}
+	return false;
+}
+//-----------------------------------------------------------------------
+bool eBoard::Start()
+{
+	if (gameStatus == eGameStatus::STARTING
+		&& IsValid())
+	{
+		gameStatus = eGameStatus::STARTED;
+		return true;
+	}
+	return false;
 }

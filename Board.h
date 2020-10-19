@@ -20,7 +20,8 @@ public:
 //todo : dima see as example ship
 	bool				AddShip(shared_ptr<eShip>);
 	bool				Start();
-
+	void				Register(eShip*);
+	void				UnRegister(eShip*);
 
 	string				Dump()						const;
 	string				ShortDump()					const;
