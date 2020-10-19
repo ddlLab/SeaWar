@@ -24,16 +24,18 @@ public:
 	void				Register(eShip*);	
 	void				UnRegister(eShip*); 
 
-	string				Dump()					const;
-	string				ShortDump()				const;
-	bool				IsValid()				const;
+	string				Dump()								const;
+	string				ShortDump()							const;
+	bool				IsValid()							const;
 
 	void				OnHitted();
-	bool				IsAlive()				const	{ return cellType == eCellType::ALIVE;  };
-	bool				IsEmpty()				const	{ return cellType == eCellType::EMPTY;  };
-	bool				IsHitted()				const	{ return cellType == eCellType::HITTED; };
-	bool				IsMissed()				const	{ return cellType == eCellType::MISSED; };
+	bool				IsMine(const eShip const* _ship)	const	{ return ship == _ship;  }
+	bool				IsAlive()							const	{ return cellType == eCellType::ALIVE;  }
+	bool				IsEmpty()							const	{ return cellType == eCellType::EMPTY;  }
+	bool				IsHitted()							const	{ return cellType == eCellType::HITTED; }
+	bool				IsMissed()							const	{ return cellType == eCellType::MISSED; }
 	
+
 	const ePosition&	Position() const	{ return pos; }
 private:
 	eShip*		ship	 = nullptr;

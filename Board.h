@@ -20,19 +20,21 @@ public:
 //todo : dima see as example ship
 	bool				AddShip(shared_ptr<eShip>);
 	bool				Start();
-	void				Register(eShip*);
-	void				UnRegister(eShip*);
+//	void				Register(eShip*);
+//	void				UnRegister(eShip*);
 
 	string				Dump()						const;
 	string				ShortDump()					const;
 
 private:
+	void				UnRegisterShips();
+
 //todo : dima see as example ship
 //todo : sasha 
 	bool				CanAddShip(const eShip& cell) const;
 
 	eGameStatus	status = eGameStatus::INVALID;
-	eShips ships;
+	eShips		ships;
 };
 
 //todo: sasha create class User which contains two Boards, and user name. you can add other optional fields

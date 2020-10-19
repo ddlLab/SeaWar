@@ -89,7 +89,7 @@ bool eShip::CanAddCell(const eCell& _cell) const
 {	
 	if (shipStatus == eShipStatus::PREPARED
 		&& _cell.IsEmpty()
-		&& cells.size() < 4)
+		&& cells.size() < eShip::MaxLength())
 	{
 		bool canAdd = true;
 		if (!cells.empty())
