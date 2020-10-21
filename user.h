@@ -3,14 +3,26 @@
 #include "board.h"
 
 
-class eUser : private eBoard
+
+class eUser
 {
 public:
-	eUser();
+	eUser(int id, const string& name);
+
 	~eUser() = default;
-	string Name;
-	eBoard board1;
-	eBoard board2;
+
+	void	Init(eBoard* _myBoard, eBoard*	_enemyBoard) {}
+	void	Done()										 {}
 
 
+	string	Dump()		const							 { return "";}
+
+	bool	CanStart()	const							 { return false; }
+
+protected:
+	int		id			= 0;
+	int		gameId		= 0;
+	string	name;
+	eBoard*	myboard		= nullptr;
+	eBoard*	enemyboard	= nullptr;
 };

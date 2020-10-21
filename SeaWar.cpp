@@ -10,10 +10,28 @@
 
 using namespace std;
 
+class A
+{
+	DEFINE_SIMPLE_STATE(int, id, Id)
+	DEFINE_SIMPLE_FIELD_TOTAL(string, name, Name)
+private:
+	int		id;
+	string	name;
+};
+
 int main()
 {
-	eBoard board;
-	cout << board.ShortDump() << endl;
+	A a;
+	a.Id(5);
+	
+	cout << a.Id()<<endl;
+	a.Name("c3po");
+	cout << a.Name()<<endl;
+	a.Name() = "bamblbee";
+	cout << a.Name()<<endl;
+	
+	//eBoard board;
+	//cout << board.ShortDump() << endl;
 	/*vector<eCell> test;
 	test.emplace_back(eCell({ 3,5 }));
 	test.emplace_back(eCell({ 3,4 }));

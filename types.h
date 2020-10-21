@@ -80,3 +80,26 @@ template<class T> static T FromString(const string&) { return T();  }
 	static bool IsValidEnum(ename _item)	{ return _item != ename::INVALID && _item != ename::TOTAL;  }			\
 	
 
+#define DEFINE_SIMPLE_STATE(type, var, method)		   \
+public:												   \
+	type      method() const		 { return var; }   \
+	void      method(type _var)		 { var = _var; }   \
+private:											   \
+
+#define DEFINE_SIMPLE_FIELD(type, var, method)						   \
+public:																   \
+	const type&     method() const					 { return var; }   \
+	void			method(const type& _var)		 { var = _var; }   \
+private:															   \
+
+#define DEFINE_SIMPLE_FIELD_REF(type, var, method)						\
+public:																	\
+	const type&     method() const					 { return var; }	\
+		  type&     method()						 { return var; }	\
+private:															    \
+
+#define DEFINE_SIMPLE_FIELD_TOTAL(type, var, method)						\
+	DEFINE_SIMPLE_FIELD(type, var, method)									\
+public:																		\
+	type&				method()						 { return var; }	\
+private:																	\

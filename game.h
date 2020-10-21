@@ -2,12 +2,14 @@
 
 #include "user.h"
 
-
-class eGame : private eUser
+class eGame
 {
 public:
 	eGame();
 	~eGame() = default;
-	eUser User1;
-	eUser User2;
+
+protected:
+	eUser* User1 = nullptr;
+	eUser* User2 = nullptr;
+
 };
