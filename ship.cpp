@@ -1,5 +1,6 @@
 #include "ship.h"
 #include "vector_tools.h"
+#include "board.h"
 #include <sstream>
 #include <algorithm>
 
@@ -56,6 +57,15 @@ bool eShip::Start()
 	}
 	return false;
 }
+//-----------------------------------------------------------------------
+void eShip::Register(eBoard* _board)
+{
+}
+//-----------------------------------------------------------------------
+void eShip::UnRegister(eBoard*  _board)
+{
+}
+
 //-----------------------------------------------------------------------
 bool eShip::OnHitted(shared_ptr<eCell> _cell) const
 {

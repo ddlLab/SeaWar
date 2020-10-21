@@ -1,5 +1,6 @@
 #include "Board.h"
 #include <sstream>
+#include "vector_tools.h"
 
 
 static const size_t MAX_COUNT = 10;
@@ -66,6 +67,12 @@ string eBoard::ShortDump() const
 	}
 	return os.str();
 }
+bool eBoard::IsValid() const
+{
+	return IsValidEnum(status)
+		&& IsValidTotal(*this) 
+		&& IsValidTotal(ships);
+}
 //-----------------------------------------------------------------------
 bool eBoard::AddShip(shared_ptr<eShip> _ship)
 {
@@ -117,7 +124,7 @@ bool eBoard::Start()
 	if (status == eGameStatus::STARTING
 		&& IsValid())
 	{
-		gameStatus = eGameStatus::STARTED;
+		status = eGameStatus::STARTED;
 		return true;
 	}
 	return false;

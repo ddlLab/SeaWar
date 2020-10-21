@@ -4,6 +4,7 @@
 #include "cell.h"
   
 class eCell;
+class eBoard;
 
 class eShip
 {

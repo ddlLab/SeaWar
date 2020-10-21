@@ -10,7 +10,7 @@ class eBoard : private eCells
 {
 public:
 	eBoard();
-	~eBoard() = default;
+	~eBoard();
 	bool				IsPreparing()				const { return status == eGameStatus::PREPARING; };
 	bool				IsStarting()				const { return status == eGameStatus::STARTING;  };
 	bool				IsStarted()					const { return status == eGameStatus::STARTED;   };
@@ -26,6 +26,7 @@ public:
 	string				Dump()						const;
 	string				ShortDump()					const;
 
+	bool				IsValid()					const;
 private:
 	void				UnRegisterShips();
 
