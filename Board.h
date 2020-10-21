@@ -4,7 +4,7 @@
 #include "ship.h"
 
 
-
+//todo alex:
 //Board must have methods ToString and CanStart() which check can we change state Perepared->Starting
 class eBoard : private eCells
 {
@@ -20,8 +20,6 @@ public:
 //todo : dima see as example ship
 	bool				AddShip(shared_ptr<eShip>);
 	bool				Start();
-//	void				Register(eShip*);
-//	void				UnRegister(eShip*);
 
 	string				Dump()						const;
 	string				ShortDump()					const;

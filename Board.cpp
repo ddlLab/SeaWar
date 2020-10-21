@@ -97,7 +97,7 @@ bool eBoard::CanAddShip(const eShip&  _ship) const
 		//1. check that we has place for this ship
 		// for example we can add only 4 - 1floor ships
 		//3 - 2 floors, etc 
-		//can use count_if
+		//can use count_if  from library algrithm
 		bool canAdd = true;
 		for (const shared_ptr<const eCell> cell : _ship.Cells())
 		{
