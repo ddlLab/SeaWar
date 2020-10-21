@@ -23,7 +23,7 @@
     <ProjectGuid>{4033A5F1-A1CF-41A9-925F-7D89EC948C6D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>SeaWar</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -153,18 +153,22 @@
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="cell.cpp" />
+    <ClCompile Include="game.cpp" />
     <ClCompile Include="SeaWar.cpp" />
     <ClCompile Include="ship.cpp" />
     <ClCompile Include="tools.cpp" />
+    <ClCompile Include="user.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="cell.h" />
     <ClInclude Include="enums.h" />
+    <ClInclude Include="game.h" />
     <ClInclude Include="sfinae_types.h" />
     <ClInclude Include="ship.h" />
     <ClInclude Include="tools.h" />
     <ClInclude Include="types.h" />
+    <ClInclude Include="user.h" />
     <ClInclude Include="vector_tools.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
