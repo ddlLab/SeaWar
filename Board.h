@@ -4,8 +4,6 @@
 #include "ship.h"
 
 
-//todo alex:
-//Board must have methods ToString and CanStart() which check can we change state Perepared->Starting
 class eBoard : private eCells
 {
 public:
@@ -23,8 +21,9 @@ public:
 
 	string				Dump()						const;
 	string				ShortDump()					const;
-
+	string				ToString()					const;
 	bool				IsValid()					const;
+
 private:
 	void				UnRegisterShips();
 
@@ -35,7 +34,3 @@ private:
 	eGameStatus	status = eGameStatus::INVALID;
 	eShips		ships;
 };
-
-//todo: sasha create class User which contains two Boards, and user name. you can add other optional fields
-//todo: sasha create class Game which contains two Users
-//please thinking  about methods about this two classes and start create method interfaces and release it

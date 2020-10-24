@@ -28,7 +28,7 @@ eBoard::eBoard()
 		for (int row = 0; row < 10; row++)
 		{
 			ePosition p(col, row);
-			emplace_back(std::make_shared<eCell>(p));
+			emplace_back(std::make_shared<eCell>(p));	
 		}
 	}
 }
@@ -67,6 +67,18 @@ string eBoard::ShortDump() const
 	}
 	return os.str();
 }
+//-----------------------------------------------------------------------
+string eBoard::ToString() const
+{
+	switch (status)
+	{
+	case eGameStatus::PREPARING: return  "Preparing";
+	case eGameStatus::STARTING: return  "Starting";
+	case eGameStatus::STARTED: return  "Started";
+	case eGameStatus::FINISHED: return  "Finished";
+	}
+}
+//-----------------------------------------------------------------------
 bool eBoard::IsValid() const
 {
 	return IsValidEnum(status)
@@ -82,43 +94,39 @@ bool eBoard::AddShip(shared_ptr<eShip> _ship)
 		_ship->Register(this);
 		return true;
 	}
-//	UnRegister(_ship);
 	return false;
 }
-//-----------------------------------------------------------------------
+/*/-----------------------------------------------------------------------
 bool eBoard::CanAddShip(const eShip&  _ship) const
 {
+	eShip ship;
+	int number;
+	int max_number;
 	if (status == eGameStatus::PREPARING
-		/*&& number of ships*/
+		/*&& number of ships/
 		&& _ship.IsPrepared()
 		&& ships.size() < MAX_COUNT)
 	{
-		//todo dima:
-		//1. check that we has place for this ship
-		// for example we can add only 4 - 1floor ships
-		//3 - 2 floors, etc 
-		//can use count_if  from library algrithm
-		bool canAdd = true;
+		switch (ship.size)
+		{
+		case ship.size(4): max_number=1;
+		case ship.size(3): max_number=2;
+		case ship.size(2): max_number=3;
+		case ship.size(1): max_number=4;
+		}
+		if (number < max_number)
+		{
+			bool canAdd = true;
+		}
 		for (const shared_ptr<const eCell> cell : _ship.Cells())
 		{
-			//find all cells around this
-			// for exmaple you can use copy_if from library algrithm
-			//after you find all around this cell 
-			//you can use for loop for finded items
-			//in for loop you can check that cell  IsEmpty or IsMine 
-			//if condition not exec canAdd =  false and break forLoop
-			
-			//* in lambda-expr you can capture some info in [] breaks
-			//for example int i=5; find_if(begin(), end(), [i](int val)
-			//{
-			//	return i == val; //I capture "i" in my lambda
-			//})
+
 		}
 		return canAdd;
 	}
 	return false;
 }
-//-----------------------------------------------------------------------
+/*///-----------------------------------------------------------------------
 bool eBoard::Start()
 {
 	if (status == eGameStatus::STARTING
