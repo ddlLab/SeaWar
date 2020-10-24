@@ -26,6 +26,21 @@ int main()
 	board.AddShip(ship);
 	system("pause");
 	system("cls");
+	ship = make_shared<eShip>();
+	ship->AddCell(board.GetCellByPos(ePosition(1, 0)));
+	ship->AddCell(board.GetCellByPos(ePosition(1, 1)));
+	ship->AddCell(board.GetCellByPos(ePosition(1, 2)));
+	board.AddShip(ship);
+	ship = make_shared<eShip>();
+	ship->AddCell(board.GetCellByPos(ePosition(0, 1)));
+	ship->AddCell(board.GetCellByPos(ePosition(1, 1)));
+	ship->AddCell(board.GetCellByPos(ePosition(2, 1)));
+	board.AddShip(ship);
+	ship = make_shared<eShip>();
+	ship->AddCell(board.GetCellByPos(ePosition(1, 2)));
+	ship->AddCell(board.GetCellByPos(ePosition(0, 2)));
+	ship->AddCell(board.GetCellByPos(ePosition(2, 2)));
+	board.AddShip(ship);
 	cout << board.ShortDump() << endl;
 
 

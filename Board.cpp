@@ -93,6 +93,7 @@ bool eBoard::AddShip(shared_ptr<eShip> _ship)
 		_ship->Register(this);
 		return true;
 	}
+	_ship->UnRegister(this);
 	return false;
 }
 //-----------------------------------------------------------------------
@@ -109,7 +110,7 @@ bool eBoard::CanAddShip(const eShip&  _ship) const
 		{
 			for (shared_ptr<const eCell> cell : *this)
 			{
-				if (ShortRoute(cellShip->Position(), cell->Position()))
+				if (ShortRoute(cellShip->Position(), cell->Position()) == 1)
 				{
 					if (!cell->IsMine(&_ship) && !cell->IsEmpty())
 					{
