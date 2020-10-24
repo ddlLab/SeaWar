@@ -1,6 +1,7 @@
-#include "Board.h"
+﻿#include "Board.h"
 #include <sstream>
 #include <iomanip>
+#include <algorithm>
 #include "vector_tools.h"
 
 
@@ -94,37 +95,56 @@ bool eBoard::AddShip(shared_ptr<eShip> _ship)
 	}
 	return false;
 }
-/*/-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
 bool eBoard::CanAddShip(const eShip&  _ship) const
 {
-	eShip ship;
-	int number;
-	int max_number;
 	if (status == eGameStatus::PREPARING
-		/*&& number of ships/
 		&& _ship.IsPrepared()
-		&& ships.size() < MAX_COUNT)
+		&& ships.size() < MAX_COUNT
+		&& LimitNotReached(_ship))
 	{
-		switch (ship.size)
-		{
-		case ship.size(4): max_number=1;
-		case ship.size(3): max_number=2;
-		case ship.size(2): max_number=3;
-		case ship.size(1): max_number=4;
-		}
-		if (number < max_number)
-		{
-			bool canAdd = true;
-		}
-		for (const shared_ptr<const eCell> cell : _ship.Cells())
-		{
+		bool canAdd = true;
 
+		for (const shared_ptr<const eCell>& cellShip : _ship.Cells())
+		{
+			for (shared_ptr<const eCell> cell : *this)
+			{
+				if (ShortRoute(cellShip->Position(), cell->Position()))
+				{
+					if (!cell->IsMine(&_ship) && !cell->IsEmpty())
+					{
+						canAdd = false;
+						break;
+					}
+				}
+			}
 		}
 		return canAdd;
 	}
 	return false;
 }
-/*///-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
+bool eBoard::LimitNotReached(const eShip&  _ship) const
+{
+	int currentShipsWithSameSize = std::count_if(ships.cbegin(),
+											     ships.cend(),
+											     [shipSize = _ship.Size()](const shared_ptr<eShip>& shipOnBoard)
+	{
+		return shipOnBoard->Size() == shipSize;
+	});
+
+	switch (_ship.Size())
+	{
+	//количество палуб
+	case 1: return currentShipsWithSameSize < 4;
+	case 2: return currentShipsWithSameSize < 3;
+	case 3: return currentShipsWithSameSize < 2;
+	case 4: return currentShipsWithSameSize < 1;
+	}
+
+	return false;
+}
+//-----------------------------------------------------------------------
 bool eBoard::Start()
 {
 	if (status == eGameStatus::STARTING
@@ -135,7 +155,17 @@ bool eBoard::Start()
 	}
 	return false;
 }
+//-----------------------------------------------------------------------
+shared_ptr<eCell>	eBoard::GetCellByPos(const ePosition& _pos)
+{
+	eBoard::iterator it = std::find_if(begin(), end(), [_pos](shared_ptr<eCell>& _cell)
+	{
+		return _cell->Position() == _pos;
+	});
+	return it != end() ? *it : nullptr;
+}
 
+//-----------------------------------------------------------------------
 void DumpHeader(std::stringstream& os)
 {
 	string word = "RESPUBLICA";
@@ -146,12 +176,12 @@ void DumpHeader(std::stringstream& os)
 	}
 	os << std::endl;
 }
-
+//-----------------------------------------------------------------------
 void DumpLineDigit(std::stringstream& os, int c)
 {
 	os << std::setw(3) << c;
 }
-
+//-----------------------------------------------------------------------
 void DumpNextLine(std::stringstream& os, int& c)
 {
 	c++;

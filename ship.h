@@ -9,10 +9,7 @@ class eBoard;
 class eShip
 {
 public:
-	static size_t		MaxLength() { return 4; } //todo dima: see MAX_COUNT in Board.cpp
-
-public:
-	eShip() = default;
+	eShip();
 	~eShip();
 
 	string				Dump()			const;
@@ -30,6 +27,7 @@ public:
 	void				UnRegister(eBoard*);
 
 	const eCells&		Cells()						  const { return cells; }
+	int					Size()						  const { return cells.size(); }
 
 
 	bool				OnHitted(shared_ptr<eCell>)	  const;

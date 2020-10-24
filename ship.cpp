@@ -4,6 +4,12 @@
 #include <sstream>
 #include <algorithm>
 
+static const size_t MAX_LENGTH = 4;
+
+//-----------------------------------------------------------------------
+eShip::eShip()
+: shipStatus(eShipStatus::PREPARED)
+{}
 //-----------------------------------------------------------------------
 eShip::~eShip()
 {
@@ -60,10 +66,13 @@ bool eShip::Start()
 //-----------------------------------------------------------------------
 void eShip::Register(eBoard* _board)
 {
+	board = _board;
 }
 //-----------------------------------------------------------------------
-void eShip::UnRegister(eBoard*  _board)
+void eShip::UnRegister(eBoard*)
 {
+	UnRegisterCells();
+	board = nullptr;
 }
 
 //-----------------------------------------------------------------------
@@ -99,10 +108,10 @@ bool eShip::CanAddCell(const eCell& _cell) const
 {	
 	if (shipStatus == eShipStatus::PREPARED
 		&& _cell.IsEmpty()
-		&& cells.size() < eShip::MaxLength())
+		&& cells.size() < MAX_LENGTH)
 	{
 		bool canAdd = true;
-		if (!cells.empty())
+		if (cells.size()>1)
 		{
 			ePosition minCell = cells[0]->Position();
 			ePosition maxCell = cells[0]->Position();

@@ -19,6 +19,8 @@ public:
 	bool				AddShip(shared_ptr<eShip>);
 	bool				Start();
 
+	shared_ptr<eCell>	GetCellByPos(const ePosition& _pos);
+
 	string				Dump()						const;
 	string				ShortDump()					const;
 	bool				IsValid()					const;
@@ -28,7 +30,8 @@ private:
 
 //todo : dima see as example ship
 //todo : sasha 
-	bool				CanAddShip(const eShip& cell) const { return true; }
+	bool				CanAddShip(const eShip&) const;
+	bool				LimitNotReached(const eShip&) const;
 
 	eGameStatus	status = eGameStatus::INVALID;
 	eShips		ships;

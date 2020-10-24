@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <algorithm>
 
 using std::string;
 using std::vector;
@@ -44,4 +45,7 @@ struct ePosition
 using ePositions = vector<ePosition>;
 
 void GetTraektory(const ePosition& from, const ePosition& to, vector<ePosition>& traektory);
-
+int GetDistanse(const ePosition& from, const ePosition& to);
+int GetDistanseX(const ePosition& from, const ePosition& to);
+int GetDistanseY(const ePosition& from, const ePosition& to);
+inline int ShortRoute(const ePosition& from, const ePosition& to) { return std::max(GetDistanseX(from,to), GetDistanseY(from, to)); }

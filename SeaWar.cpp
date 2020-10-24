@@ -4,6 +4,7 @@
 #include <iostream>
 #include <conio.h>
 #include <array>
+#include <memory>
 #include "cell.h"
 #include "board.h"
 #include "vector_tools.h"
@@ -16,6 +17,18 @@ int main()
 
 	eBoard board;
 	cout << board.ShortDump() << endl;
+	shared_ptr<eShip> ship = make_shared<eShip>();
+	ship->AddCell(board.GetCellByPos(ePosition(0, 0)));
+	ship->AddCell(board.GetCellByPos(ePosition(1, 0)));
+	ship->AddCell(board.GetCellByPos(ePosition(2, 0)));
+	ship->AddCell(board.GetCellByPos(ePosition(3, 0)));
+	//ship->AddCell(board.GetCellByPos(ePosition(0, 0)));
+	board.AddShip(ship);
+	system("pause");
+	system("cls");
+	cout << board.ShortDump() << endl;
+
+
 	system("pause");
 	/*vector<eCell> test;
 	test.emplace_back(eCell({ 3,5 }));

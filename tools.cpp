@@ -22,6 +22,23 @@ std::string ePosition::Dump()	const
 	return t;
 }
 
+int GetDistanse(const ePosition& from, const ePosition& to)
+{
+	return pow((from.XToBoard() - to.XToBoard()), 2) + pow((from.YToBoard() - to.YToBoard()), 2);
+}
+
+int GetDistanseX(const ePosition& from, const ePosition& to)
+{
+	return pow((from.XToBoard() - to.XToBoard()), 2);
+}
+
+int GetDistanseY(const ePosition& from, const ePosition& to)
+{
+	return pow((from.YToBoard() - to.YToBoard()), 2);
+}
+
+
+
 
 void GetTraektory(const ePosition& _from, const ePosition& _to, vector<ePosition>& _traektory)
 {
