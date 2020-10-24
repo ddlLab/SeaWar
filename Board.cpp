@@ -1,9 +1,15 @@
 #include "Board.h"
 #include <sstream>
+#include <iomanip>
 #include "vector_tools.h"
 
 
 static const size_t MAX_COUNT = 10;
+
+static void DumpHeader(std::stringstream& os);
+static void DumpLineDigit(std::stringstream& os, int c);
+static void DumpNextLine(std::stringstream& os, int& c);
+
 
 //-----------------------------------------------------------------------
 eBoard::~eBoard()
@@ -53,30 +59,22 @@ string eBoard::Dump() const
 string eBoard::ShortDump() const
 {
 	int i=0;
+	int c=1;
 	std::stringstream os;
+	
+	DumpHeader(os);
+	DumpLineDigit(os, c);
 	for (shared_ptr<const eCell> cell : *this)
 	{
 		os << "|" << cell->ShortDump();
 		i++;
-		if (i == 10)
+		if (i == 10)// back == last item
 		{
+			DumpNextLine(os, c);
 			i = 0;
-			os << "|\n";
 		}
-
 	}
 	return os.str();
-}
-//-----------------------------------------------------------------------
-string eBoard::ToString() const
-{
-	switch (status)
-	{
-	case eGameStatus::PREPARING: return  "Preparing";
-	case eGameStatus::STARTING: return  "Starting";
-	case eGameStatus::STARTED: return  "Started";
-	case eGameStatus::FINISHED: return  "Finished";
-	}
 }
 //-----------------------------------------------------------------------
 bool eBoard::IsValid() const
@@ -136,4 +134,28 @@ bool eBoard::Start()
 		return true;
 	}
 	return false;
+}
+
+void DumpHeader(std::stringstream& os)
+{
+	string word = "RESPUBLICA";
+	os << std::setw(4) << "|";
+	for (char s : word)
+	{
+		os << s << "|";
+	}
+	os << std::endl;
+}
+
+void DumpLineDigit(std::stringstream& os, int c)
+{
+	os << std::setw(3) << c;
+}
+
+void DumpNextLine(std::stringstream& os, int& c)
+{
+	c++;
+	os << "|" << std::endl;
+	if (c <= 10)
+		DumpLineDigit(os, c);
 }

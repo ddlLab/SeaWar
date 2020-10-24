@@ -8,7 +8,7 @@ class eBoard : private eCells
 {
 public:
 	eBoard();
-	~eBoard();
+	virtual ~eBoard();
 	bool				IsPreparing()				const { return status == eGameStatus::PREPARING; };
 	bool				IsStarting()				const { return status == eGameStatus::STARTING;  };
 	bool				IsStarted()					const { return status == eGameStatus::STARTED;   };
@@ -21,7 +21,6 @@ public:
 
 	string				Dump()						const;
 	string				ShortDump()					const;
-	string				ToString()					const;
 	bool				IsValid()					const;
 
 private:
@@ -29,7 +28,7 @@ private:
 
 //todo : dima see as example ship
 //todo : sasha 
-	bool				CanAddShip(const eShip& cell) const;
+	bool				CanAddShip(const eShip& cell) const { return true; }
 
 	eGameStatus	status = eGameStatus::INVALID;
 	eShips		ships;
