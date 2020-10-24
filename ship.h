@@ -10,7 +10,7 @@ class eShip
 {
 public:
 	static size_t		MaxLength() { return 4; } //todo dima: see MAX_COUNT in Board.cpp
-
+	static size_t		MaxCount();
 public:
 	eShip() = default;
 	~eShip();

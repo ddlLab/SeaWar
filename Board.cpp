@@ -1,10 +1,10 @@
 #include "Board.h"
 #include <sstream>
 #include "vector_tools.h"
+#include <algorithm>
 
-
-static const size_t MAX_COUNT = 10;
-
+static const size_t MaxCount = 10;
+static const size_t MaxLength = 4;
 //-----------------------------------------------------------------------
 eBoard::~eBoard()
 {
@@ -91,7 +91,7 @@ bool eBoard::CanAddShip(const eShip&  _ship) const
 	if (status == eGameStatus::PREPARING
 		/*&& number of ships*/
 		&& _ship.IsPrepared()
-		&& ships.size() < MAX_COUNT)
+		&& ships.size() < MaxCount)
 	{
 		//todo dima:
 		//1. check that we has place for this ship
@@ -101,6 +101,8 @@ bool eBoard::CanAddShip(const eShip&  _ship) const
 		bool canAdd = true;
 		for (const shared_ptr<const eCell> cell : _ship.Cells())
 		{
+			
+
 			//find all cells around this
 			// for exmaple you can use copy_if from library algrithm
 			//after you find all around this cell 
