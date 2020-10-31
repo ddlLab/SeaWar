@@ -22,8 +22,9 @@ public:
 	shared_ptr<eCell>	GetCellByPos(const ePosition& _pos);
 
 	string				Dump()						const;
-	string				ShortDump()					const;
+	string				ShortDump(bool isCurrentPlayer)					const;
 	bool				IsValid()					const;
+	eHitResult			OnHitted(const ePosition& _pos);
 
 private:
 	void				UnRegisterShips();

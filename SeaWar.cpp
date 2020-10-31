@@ -16,7 +16,7 @@ int main()
 {
 
 	eBoard board;
-	cout << board.ShortDump() << endl;
+	cout << board.ShortDump(true) << endl;
 	shared_ptr<eShip> ship = make_shared<eShip>();
 	ship->AddCell(board.GetCellByPos(ePosition(0, 0)));
 	ship->AddCell(board.GetCellByPos(ePosition(1, 0)));
@@ -38,10 +38,22 @@ int main()
 	board.AddShip(ship);
 	ship = make_shared<eShip>();
 	ship->AddCell(board.GetCellByPos(ePosition(1, 2)));
-	ship->AddCell(board.GetCellByPos(ePosition(0, 2)));
 	ship->AddCell(board.GetCellByPos(ePosition(2, 2)));
+	ship->AddCell(board.GetCellByPos(ePosition(0, 2)));
 	board.AddShip(ship);
-	cout << board.ShortDump() << endl;
+	cout << board.ShortDump(true) << endl;
+	ship = make_shared<eShip>();
+	ship->AddCell(board.GetCellByPos(ePosition(3, 5)));
+	ship->AddCell(board.GetCellByPos(ePosition(0, 5)));
+	ship->AddCell(board.GetCellByPos(ePosition(1, 5)));
+	ship->AddCell(board.GetCellByPos(ePosition(2, 5)));
+	//ship->AddCell(board.GetCellByPos(ePosition(0, 0)));
+	board.AddShip(ship);
+	cout <<"Result: "<< board.OnHitted(ePosition(1, 5))<<endl;
+	cout << board.ShortDump(true) << endl;
+	cout <<"Result: "<< board.OnHitted(ePosition(0, 0))<<endl;
+	cout << board.ShortDump(true) << endl;
+	cout << board.ShortDump(false) << endl;
 
 
 	system("pause");

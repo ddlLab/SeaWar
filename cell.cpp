@@ -27,11 +27,11 @@ string eCell::Dump() const
 	return res.str();
 }
 //-----------------------------------------------------------------------
-string eCell::ShortDump() const
+string eCell::ShortDump(bool isCurrentPlayer) const
 {
 	switch (cellType)
 	{
-	case eCellType::ALIVE: return  "O";
+	case eCellType::ALIVE: return isCurrentPlayer? "O":"~";
 	case eCellType::EMPTY: return  "~";
 	case eCellType::HITTED:return  "X";
 	case eCellType::MISSED:return  "*";
@@ -44,11 +44,12 @@ bool eCell::IsValid() const
 	return IsValidEnum(cellType) && pos.IsValid();
 }
 //-----------------------------------------------------------------------
-void eCell::OnHitted()
+bool eCell::OnHitted()
 {
 	switch (cellType)
 	{
-	case eCellType::ALIVE: cellType = eCellType::HITTED;
-	case eCellType::EMPTY: cellType = eCellType::MISSED;
+	case eCellType::ALIVE: cellType = eCellType::HITTED; return true;
+	case eCellType::EMPTY: cellType = eCellType::MISSED; return true;
 	}
+	return false;
 }

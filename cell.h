@@ -26,10 +26,10 @@ public:
 	void				UnRegister(eShip*); 
 
 	string				Dump()								const;
-	string				ShortDump()							const;
+	string				ShortDump(bool isCurrentPlayer)							const;
 	bool				IsValid()							const;
 
-	void				OnHitted();
+	bool				OnHitted();
 	bool				IsMine(const eShip const* _ship)	const	{ return ship == _ship;  }
 	bool				IsAlive()							const	{ return cellType == eCellType::ALIVE;  }
 	bool				IsEmpty()							const	{ return cellType == eCellType::EMPTY;  }

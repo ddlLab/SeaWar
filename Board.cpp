@@ -57,7 +57,7 @@ string eBoard::Dump() const
 	return os.str();
 }
 //-----------------------------------------------------------------------
-string eBoard::ShortDump() const
+string eBoard::ShortDump(bool isCurrentPlayer) const
 {
 	int i=0;
 	int c=1;
@@ -67,7 +67,7 @@ string eBoard::ShortDump() const
 	DumpLineDigit(os, c);
 	for (shared_ptr<const eCell> cell : *this)
 	{
-		os << "|" << cell->ShortDump();
+		os << "|" << cell->ShortDump(isCurrentPlayer);
 		i++;
 		if (i == 10)// back == last item
 		{
@@ -83,6 +83,27 @@ bool eBoard::IsValid() const
 	return IsValidEnum(status)
 		&& IsValidTotal(*this) 
 		&& IsValidTotal(ships);
+}
+//-----------------------------------------------------------------------
+eHitResult eBoard::OnHitted(const ePosition& _pos) 
+{
+	eBoard::iterator it = std::find_if(begin(), end(), [_pos](shared_ptr<eCell>& _cell)
+	{
+		return _cell->Position() == _pos;
+	});
+	if(it==end())
+	{
+		return eHitResult::INVALID;
+	}
+	if(!(*it)->OnHitted())
+	{
+		return eHitResult::DOUBLESHOT;
+	}
+	if ((*it)->IsHitted())
+	{
+		return eHitResult::HITTED;
+	}
+	return eHitResult::MISSED;
 }
 //-----------------------------------------------------------------------
 bool eBoard::AddShip(shared_ptr<eShip> _ship)
