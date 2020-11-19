@@ -64,6 +64,7 @@ string eBoard::ShortDump(bool isCurrentPlayer) const
 	std::stringstream os;
 	
 	DumpHeader(os);
+	os << std::endl;
 	DumpLineDigit(os, c);
 	for (shared_ptr<const eCell> cell : *this)
 	{
@@ -196,7 +197,6 @@ void DumpHeader(std::stringstream& os)
 	{
 		os << s << "|";
 	}
-	os << std::endl;
 }
 //-----------------------------------------------------------------------
 void DumpLineDigit(std::stringstream& os, int c)

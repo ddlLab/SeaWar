@@ -14,6 +14,7 @@ extern const char END_ROW;
 
 struct ePosition
 {
+	ePosition(string comm):col(comm[0]),row(comm[1]){}
 	ePosition(char x, char y):col(x),row(y){}
 	ePosition(int x, int y):col(x+START_COL),row(y+START_ROW){}
 	ePosition()								= default;

@@ -156,6 +156,7 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="SeaWar.cpp" />
     <ClCompile Include="ship.cpp" />
+    <ClCompile Include="text_functions.cpp" />
     <ClCompile Include="tools.cpp" />
     <ClCompile Include="user.cpp" />
   </ItemGroup>
@@ -166,6 +167,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="sfinae_types.h" />
     <ClInclude Include="ship.h" />
+    <ClInclude Include="text_functions.h" />
     <ClInclude Include="tools.h" />
     <ClInclude Include="types.h" />
     <ClInclude Include="user.h" />

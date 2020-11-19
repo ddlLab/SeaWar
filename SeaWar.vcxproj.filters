@@ -22,6 +22,9 @@
     <ClCompile Include="user.cpp">
       <Filter>1.logic</Filter>
     </ClCompile>
+    <ClCompile Include="text_functions.cpp">
+      <Filter>0.base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="types.h">
@@ -52,6 +55,9 @@
       <Filter>1.logic</Filter>
     </ClInclude>
     <ClInclude Include="sfinae_types.h">
+      <Filter>0.base</Filter>
+    </ClInclude>
+    <ClInclude Include="text_functions.h">
       <Filter>0.base</Filter>
     </ClInclude>
   </ItemGroup>
