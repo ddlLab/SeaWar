@@ -30,9 +30,9 @@ void eBoard::UnRegisterShips()
 eBoard::eBoard()
 :status(eGameStatus::PREPARING)
 {
-	for (int col = 0; col < 10; col++)
+	for (int row = 0; row < 10; row++)
 	{
-		for (int row = 0; row < 10; row++)
+		for (int col = 0; col < 10; col++)
 		{
 			ePosition p(col, row);
 			emplace_back(std::make_shared<eCell>(p));	
@@ -60,7 +60,7 @@ string eBoard::Dump() const
 string eBoard::ShortDump(bool isCurrentPlayer) const
 {
 	int i=0;
-	int c=1;
+	int c=0;
 	std::stringstream os;
 	
 	DumpHeader(os);
@@ -191,7 +191,7 @@ shared_ptr<eCell>	eBoard::GetCellByPos(const ePosition& _pos)
 //-----------------------------------------------------------------------
 void DumpHeader(std::stringstream& os)
 {
-	string word = "RESPUBLICA";
+	string word = "ABCDEFGHIJ";
 	os << std::setw(4) << "|";
 	for (char s : word)
 	{

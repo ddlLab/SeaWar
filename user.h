@@ -34,11 +34,11 @@ public:
 protected:
 	virtual  void	DoStep_(const fCompleter& func) = 0;
 	
-	int		id			= 0;
-	int		gameId		= 0;
-	string	name;
-	eBoard*	myboard		= nullptr;
-	eBoard*	enemyboard	= nullptr;
+	const	int		id			= 0;
+	const	string	name;
+	const	int		gameId		= 0;
+	eBoard*			myboard		= nullptr;
+	eBoard*			enemyboard	= nullptr;
 };
 
 class eConsoleUser : public eUser

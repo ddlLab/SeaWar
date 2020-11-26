@@ -5,66 +5,18 @@
 #include <conio.h>
 #include <array>
 #include <memory>
-#include "cell.h"
-#include "board.h"
-#include "vector_tools.h"
-#include "user.h"
-#include "text_functions.h"
+#include "game.h"
 
 using namespace std;
 
-void f(bool isSuccess, bool isHitted)
-{
-	cout << "isSuccess:" << isSuccess << "\tisHitted:" << isHitted << endl;
-}
 
 int main()
 {
-	string test = "a,b,c,d";
-	vector<string> test1;
-	Split(test, test1, "");
-
-
-
 	eConsoleUser user1(1, "Ivanuch");
 	eConsoleUser user2(2, "Petrovich");
-	eBoard board1;
-	eBoard board2;
-	user1.Init(&board1, &board2);
-	user2.Init(&board2, &board1);
-	shared_ptr<eShip> ship = make_shared<eShip>();
-	ship->AddCell(board1.GetCellByPos(ePosition(0, 0)));
-	ship->AddCell(board1.GetCellByPos(ePosition(1, 0)));
-	ship->AddCell(board1.GetCellByPos(ePosition(2, 0)));
-	ship->AddCell(board1.GetCellByPos(ePosition(3, 0)));
-	//ship->AddCell(board.GetCellByPos(ePosition(0, 0)));
-	board1.AddShip(ship);
-	system("pause");
-	system("cls");
-	ship = make_shared<eShip>();
-	ship->AddCell(board2.GetCellByPos(ePosition(1, 0)));
-	ship->AddCell(board2.GetCellByPos(ePosition(1, 1)));
-	ship->AddCell(board2.GetCellByPos(ePosition(1, 2)));
-	board2.AddShip(ship);
-	ship = make_shared<eShip>();
-	ship->AddCell(board1.GetCellByPos(ePosition(0, 5)));
-	ship->AddCell(board1.GetCellByPos(ePosition(1, 5)));
-	ship->AddCell(board1.GetCellByPos(ePosition(2, 5)));
-	board1.AddShip(ship);
-	ship = make_shared<eShip>();
-	ship->AddCell(board2.GetCellByPos(ePosition(7, 2)));
-	ship->AddCell(board2.GetCellByPos(ePosition(6, 2)));
-	ship->AddCell(board2.GetCellByPos(ePosition(5, 2)));
-	board2.AddShip(ship);
-	
-	while (true)
-	{
-		//	system("clr");
-		user1.DoStep([](bool isSuccess, bool isHittted)
-		{
-			f(isSuccess, isHittted);
-		});
-	}
+	eGame game(&user1, &user2);
+	game.Init();
+	game.Start();
 
 	/*vector<eCell> test;
 	test.emplace_back(eCell({ 3,5 }));
