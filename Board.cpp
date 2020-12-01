@@ -115,6 +115,7 @@ bool eBoard::AddShip(shared_ptr<eShip> _ship)
 		_ship->Register(this);
 		return true;
 	}
+	shipcount++;
 	_ship->UnRegister(this);
 	return false;
 }

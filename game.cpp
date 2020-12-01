@@ -1,6 +1,8 @@
 #include "game.h"
 #include <iostream>
 
+using namespace std;
+
 eGame::eGame(eUser* _user1, eUser* _user2)
 : user1(_user1)
 , user2(_user2)
@@ -9,46 +11,66 @@ eGame::eGame(eUser* _user1, eUser* _user2)
 
 void eGame::Init()
 {
+	board1.shipcount = 0;
+	board2.shipcount = 0;
 	user1->Init(&board1, &board2);
 	user2->Init(&board2, &board1);
-
-	//ePreparer preparer(&board1, &board2);
-	//preparer.Start();
-
-	//delete after implement preparer
-	/*
-	shared_ptr<eShip> ship = make_shared<eShip>();
-	ship->AddCell(board1.GetCellByPos(ePosition(0, 0)));
-	ship->AddCell(board1.GetCellByPos(ePosition(1, 0)));
-	ship->AddCell(board1.GetCellByPos(ePosition(2, 0)));
-	ship->AddCell(board1.GetCellByPos(ePosition(3, 0)));
-	board1.AddShip(ship);
-	ship = make_shared<eShip>();
-	ship->AddCell(board2.GetCellByPos(ePosition(1, 0)));
-	ship->AddCell(board2.GetCellByPos(ePosition(1, 1)));
-	ship->AddCell(board2.GetCellByPos(ePosition(1, 2)));
-	board2.AddShip(ship);
-	ship = make_shared<eShip>();
-	ship->AddCell(board1.GetCellByPos(ePosition(0, 5)));
-	ship->AddCell(board1.GetCellByPos(ePosition(1, 5)));
-	ship->AddCell(board1.GetCellByPos(ePosition(2, 5)));
-	board1.AddShip(ship);
-	ship = make_shared<eShip>();
-	ship->AddCell(board2.GetCellByPos(ePosition(7, 2)));
-	ship->AddCell(board2.GetCellByPos(ePosition(6, 2)));
-	ship->AddCell(board2.GetCellByPos(ePosition(5, 2)));
-	board2.AddShip(ship);
-	*/
+	{
+		cout << "Игрок 1 введите корабли" << endl;
+		cout << "Введите координаты корабля(по 1 клетке(пример: '0, 1')" << endl;
+		cin >> cords;
+		shared_ptr<eShip> ship = make_shared<eShip>();
+		ship->AddCell(board1.GetCellByPos(ePosition(cords)));
+		cout <<eCells.shortDump(true) << endl;
+		while (board1.shipcount != 10)
+		{
+			cout << "Введите координаты корабля" << endl;
+			cout << "Если корабль готов нажмите 'R'" << endl;
+			cin >> cords;
+			if (cords != "r" || cords != "R")
+			{
+				ship->AddCell(board1.GetCellByPos(ePosition(cords)));
+				cout << eCells.shortDump(true) << endl;
+			}
+			else
+			{
+				board1.AddShip(ship);
+				cout << eCells.shortDump(true) << endl;
+			}
+		}
+	}
+	{
+		cout << "Игрок 2 введите корабли" << endl;
+		cout << "Введите координаты корабля(по 1 клетке(пример: '0, 1')" << endl;
+		cin >> cords;
+		shared_ptr<eShip> ship = make_shared<eShip>();
+		ship->AddCell(board2.GetCellByPos(ePosition(cords)));
+		cout << eCells.shortDump(true) << endl;
+		while (board2.shipcount != 10)
+		{
+			cout << "Введите координаты корабля" << endl;
+			cout << "Если корабль готов нажмите 'R'" << endl;
+			cin >> cords;
+			if (cords != "r" || cords != "R")
+			{
+				ship->AddCell(board2.GetCellByPos(ePosition(cords)));
+					cout << eCells.shortDump(true) << endl;
+			}
+			else
+			{
+				board2.AddShip(ship);
+					cout << eCells.shortDump(true) << endl;
+			}
+		}
+	}
 }
 
 void eGame::Start()
 {
-	//if (user1->CanStart() && user2->CanStart())
+	if ((user1->CanStart() && user2->CanStart())&&(Board1Ready && Board2Ready))
 	{
 		DoStep();
 	}
-
-
 }
 void eGame::Done()
 {

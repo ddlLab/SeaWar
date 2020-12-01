@@ -38,7 +38,7 @@ int main()
 	cout << "test:" << IsValidTotal(test) << endl;
 
 	cout << "test1:" << IsValidTotal(test1) << endl;
-	*//*
+	
 	eCell  cell({ 3,3 });
 	cout << cell.Dump() << endl;
 

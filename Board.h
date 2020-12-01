@@ -19,6 +19,8 @@ public:
 	bool				AddShip(shared_ptr<eShip>);
 	bool				Start();
 
+	int					shipcount;
+
 	shared_ptr<eCell>	GetCellByPos(const ePosition& _pos);
 
 	string				Dump()						const;
@@ -30,10 +32,9 @@ private:
 	void				UnRegisterShips();
 
 //todo : dima see as example ship
-//todo : sasha 
 	bool				CanAddShip(const eShip&) const;
 	bool				LimitNotReached(const eShip&) const;
 
-	eGameStatus	status = eGameStatus::INVALID;
-	eShips		ships;
+	eGameStatus			status = eGameStatus::INVALID;
+	eShips				ships;
 };
