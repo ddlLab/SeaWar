@@ -113,9 +113,12 @@ bool eBoard::AddShip(shared_ptr<eShip> _ship)
 	{
 		ships.emplace_back(_ship);
 		_ship->Register(this);
+		if (ships.size() == 10)
+		{
+			status = eGameStatus::STARTING;
+		}
 		return true;
 	}
-	shipcount++;
 	_ship->UnRegister(this);
 	return false;
 }

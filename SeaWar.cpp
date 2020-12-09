@@ -5,13 +5,16 @@
 #include <conio.h>
 #include <array>
 #include <memory>
+#include <windows.h>
 #include "game.h"
 
 using namespace std;
 
 
+
 int main()
 {
+	setlocale(LC_ALL, "rus");
 	eConsoleUser user1(1, "Ivanuch");
 	eConsoleUser user2(2, "Petrovich");
 	eGame game(&user1, &user2);

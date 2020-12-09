@@ -22,15 +22,15 @@ public:
 	eUser& operator=(const eUser&)		= delete;
 	eUser& operator=(eUser&&)			= delete;
 
-	void	Init(eBoard* _myBoard, eBoard* _enemyBoard);
-	void	Done();
+	void			Init(eBoard* _myBoard, eBoard* _enemyBoard);
+	void			Done();
 
 
-	string	Dump()		const;
-	bool	CanStart()	const;
+	string			Dump()		const;
+	bool			CanStart()	const;
 
-	void	DoStep(const fCompleter& func) { DoStep_(func); }
-
+	void			DoStep(const fCompleter& func) { DoStep_(func); }
+	const string& 	Name()		const	{ return name;}
 protected:
 	virtual  void	DoStep_(const fCompleter& func) = 0;
 	

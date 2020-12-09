@@ -19,7 +19,6 @@ public:
 	bool				AddShip(shared_ptr<eShip>);
 	bool				Start();
 
-	int					shipcount;
 
 	shared_ptr<eCell>	GetCellByPos(const ePosition& _pos);
 

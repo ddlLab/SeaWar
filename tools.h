@@ -49,4 +49,4 @@ void GetTraektory(const ePosition& from, const ePosition& to, vector<ePosition>&
 int GetDistanse(const ePosition& from, const ePosition& to);
 int GetDistanseX(const ePosition& from, const ePosition& to);
 int GetDistanseY(const ePosition& from, const ePosition& to);
-inline int ShortRoute(const ePosition& from, const ePosition& to) { return std::max(GetDistanseX(from,to), GetDistanseY(from, to)); }
+inline int ShortRoute(const ePosition& from, const ePosition& to) { return std::max<int>(GetDistanseX(from,to), GetDistanseY(from, to)); }
