@@ -102,6 +102,8 @@ eHitResult eBoard::OnHitted(const ePosition& _pos)
 	}
 	if ((*it)->IsHitted())
 	{
+		ships.Update();
+		status = ships.IsAnyAlive() ? eGameStatus::STARTED : eGameStatus::FINISHED;
 		return eHitResult::HITTED;
 	}
 	return eHitResult::MISSED;

@@ -29,10 +29,10 @@ public:
 	const eCells&		Cells()						  const { return cells; }
 	int					Size()						  const { return cells.size(); }
 
+	void				CheckStatus();
 
 	bool				OnHitted(shared_ptr<eCell>)	  const;
 private:
-	void				CheckStatus();
 	bool				CanAddCell(const eCell& cell) const;
 	void				UnRegisterCells();
 
@@ -41,5 +41,10 @@ private:
 	eBoard*		board = nullptr;
 };
 
-using eShips = vector<shared_ptr<eShip>>;
+class eShips : public vector<shared_ptr<eShip>>
+{
+public:
+	void Update();
+	bool IsAnyAlive() const;
+};
 

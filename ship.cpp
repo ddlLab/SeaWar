@@ -138,3 +138,18 @@ bool eShip::CanAddCell(const eCell& _cell) const
 	return false;
 }
 //-----------------------------------------------------------------------
+
+void eShips::Update()
+{ 
+	std::for_each(begin(), end(), [](const shared_ptr<eShip>& _ship)
+	{
+			_ship->CheckStatus();
+	});
+}
+bool eShips::IsAnyAlive() const
+{
+	return std::any_of(cbegin(), cend(), [](const shared_ptr<eShip>& _ship)
+	{
+		return _ship->IsDead();
+	});
+}

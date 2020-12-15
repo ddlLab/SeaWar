@@ -16,15 +16,11 @@ public:
 protected:
 	void DoStep();
 	void OnUserStepped(bool isSuccess, bool isHitted);
-	void PrepareBoard1(eBoard board1);
-	void PrepareBoard2(eBoard board2);
-
+	
 	eUser*		user1 = nullptr;
 	eUser*		user2 = nullptr;
 	eBoard		board1;
 	eBoard		board2;
 	bool		isFirstPlayerStep = true;
-	bool		Board1Ready = false;
-	bool		Board2Ready = false;
 	uint32_t	step = 0;
 };

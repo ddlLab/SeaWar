@@ -4,55 +4,8 @@
 
 using namespace std;
 
-void eGame::PrepareBoard1(eBoard board1)
-{
-	string cords;
-	while (board1.IsPreparing())
-	{
-		shared_ptr<eShip> ship = make_shared<eShip>();
-		cout << "Игрок " << user1->Name() << " введите корабли" << endl;
-		cout << "Введите координаты корабля(по 1 клетке(пример: '0, 1')" << endl;
-		cout << "Если корабль готов нажмите 'R'" << endl;
-		int it = 0;
-		while (it < 4)
-		{
-			cin >> cords;
-			if (cords == "r" || cords == "R") break;
-			auto cell = board1.GetCellByPos(ePosition(cords));
-			ship->AddCell(cell);
-			it++;
-		}
-		board1.AddShip(ship);
-		cout << board1.ShortDump(true) << endl;
-		cords = "";
-		ship.reset();
-	}
-}
-
-void eGame::PrepareBoard2(eBoard board2)
-{
-	string cords;
-	while (board2.IsPreparing())
-	{
-		shared_ptr<eShip> ship = make_shared<eShip>();
-		cout << "Игрок " <<user1->Name() << " введите корабли" << endl;
-		cout << "Введите координаты корабля(по 1 клетке(пример: '0, 1')" << endl;
-		cout << "Если корабль готов нажмите 'R'" << endl;
-		int it = 0;
-		while (it < 4)
-		{
-			cin >> cords;
-			if (cords == "r" || cords == "R") break;
-			auto cell = board2.GetCellByPos(ePosition(cords));
-			ship->AddCell(cell);
-			it++;
-		}
-		board2.AddShip(ship);
-		cout << board2.ShortDump(true) << endl;
-		cords = "";
-		ship.reset();
-	}
-}
+static void PrepareBoard(eBoard* board, eUser* user);
+static void PrepareBoard(eBoard* board, eUser* user, istream& is);
 
 #define TEST
 
@@ -61,77 +14,26 @@ eGame::eGame(eUser* _user1, eUser* _user2)
 , user2(_user2)
 {
 }
-#ifdef TEST
 void eGame::Init()
 {
 	user1->Init(&board1, &board2);
 	user2->Init(&board2, &board1);
-	string cords = "a0|b3|c5|d7|c0 c1|e0 e1|g0 g1|i0 i1|i0 i1 i2|i7 h7 g7|g9 h9 i9 j9";
-	//todo dima:
-	//GenerateBoard(board1, map1)//where map is something like string cords
-	//GenerateBoard(board2, map2)//where map is something like string cords
-	//down code this is sample what are your func must do. you can copy and some refac it
-	//! do it as func not as method
-	vector<string> ships;
-	Split(cords, ships, '|');
-	for (const string& shipStr : ships)
-	{
-		stringstream ss;
-		ss << shipStr;
-		shared_ptr<eShip> ship = make_shared<eShip>();
-		while (!ss.eof())
-		{
-			string pos;
-			ss >> pos;
-			cout << pos<< endl;
-			auto cell = board1.GetCellByPos(ePosition(cords));
-			cout << cell->Dump()<< endl;
-			ship->AddCell(cell);
-		}
-		board1.AddShip(ship);
-		cout << board1.ShortDump(true) << endl;
-		ship.reset();
-	}
-	
-	/*
-	{
-		cout << "Игрок 2 введите корабли" << endl;
-		cout << "Введите координаты корабля(по 1 клетке(пример: '0, 1')" << endl;
-		cin >> cords;
-		shared_ptr<eShip> ship = make_shared<eShip>();
-		ship->AddCell(board2.GetCellByPos(ePosition(cords)));
-		cout << eCells.shortDump(true) << endl;
-		while (board2.shipcount != 10)
-		{
-			cout << "Введите координаты корабля" << endl;
-			cout << "Если корабль готов нажмите 'R'" << endl;
-			cin >> cords;
-			if (cords != "r" || cords != "R")
-			{
-				ship->AddCell(board2.GetCellByPos(ePosition(cords)));
-					cout << eCells.shortDump(true) << endl;
-			}
-			else
-			{
-				board2.AddShip(ship);
-					cout << eCells.shortDump(true) << endl;
-			}
-		}
-	}*/
-}
+#ifndef TEST
+	PrepareBoard(&board1, user1);
+	PrepareBoard(&board2, user2);
 #else
-void eGame::Init()
-{
-	user1->Init(&board1, &board2);
-	user2->Init(&board2, &board1);
-	PrepareBoard1(board1);
-	PrepareBoard2(board2);
-}
+	stringstream ss1;
+	ss1 << "a0 r b3 r c5 r d7 r c0 c1 r e0 e1 r g0 g1 r i0 i1 r i0 i1 i2 r i7 h7 g7 r g9 h9 i9 j9 r";
+	PrepareBoard(&board1, user1,ss1);
+	stringstream ss2;
+	ss2 << "a0 r c0 r e0 r g0 r a2 b2 r d2 d3 r f2 f3 r i0 i1 i2 r i7 h7 g7 r g9 h9 i9 j9 r";
+	PrepareBoard(&board2, user2, ss2);
 #endif
+}
 
 void eGame::Start()
 {
-	if ((user1->CanStart() && user2->CanStart())&&(Board1Ready && Board2Ready))
+	if (user1->CanStart() && user2->CanStart())
 	{
 		DoStep();
 	}
@@ -143,8 +45,15 @@ void eGame::Done()
 
 void eGame::DoStep()
 {
-	if (board1.IsFinished() || board2.IsFinished())
+	if (board1.IsFinished())
 	{
+		cout << user2->Name() << " в неравном но очень стремном бою одержал неравную но очень стремную победу!";
+		return;
+	}
+
+	if (board2.IsFinished())
+	{
+		cout << user1->Name() << "при трезвом уме и нетвердой памяти одержал неравную но очень стремную победу!";
 		return;
 	}
 	eUser* user = isFirstPlayerStep ? user1 : user2;
@@ -172,4 +81,59 @@ void eGame::OnUserStepped(bool isSuccess, bool isHitted)
 	}
 	isFirstPlayerStep = !isFirstPlayerStep;
 	DoStep();
+}
+
+static void PrepareBoard(eBoard* board, eUser* user)
+{
+	{
+		string cords;
+		while (board->IsPreparing())
+		{
+			shared_ptr<eShip> ship = make_shared<eShip>();
+			cout << "Игрок " << user->Name() << " введите корабли" << endl;
+			cout << "Введите координаты корабля(по 1 клетке(пример: '0, 1')" << endl;
+			cout << "Если корабль готов нажмите 'R'" << endl;
+			int it = 0;
+			while (it < 4)
+			{
+				cin >> cords;
+				if (cords == "r" || cords == "R") break;
+				auto cell = board->GetCellByPos(ePosition(cords));
+				ship->AddCell(cell);
+				it++;
+			}
+			board->AddShip(ship);
+			cout << board->ShortDump(true) << endl;
+			cords = "";
+			ship.reset();
+		}
+	}
+}
+
+static void PrepareBoard(eBoard* board, eUser* user, istream& is)
+{
+	{
+		string cords;
+		cout << "Игрок " << user->Name() << " введите корабли" << endl;
+		while (board->IsPreparing())
+		{
+			shared_ptr<eShip> ship = make_shared<eShip>();
+			//cout << "Введите координаты корабля(по 1 клетке(пример: '0, 1')" << endl;
+			//cout << "Если корабль готов нажмите 'R'" << endl;
+			int it = 0;
+			while (it < 4)
+			{
+				is >> cords;
+				if (cords == "r" || cords == "R") break;
+				auto cell = board->GetCellByPos(ePosition(cords));
+				ship->AddCell(cell);
+				it++;
+			}
+			board->AddShip(ship);
+			//cout << board->ShortDump(true) << endl;
+			cords = "";
+			ship.reset();
+		}
+		cout << board->ShortDump(true) << endl;
+	}
 }
