@@ -16,6 +16,8 @@ public:
 protected:
 	void DoStep();
 	void OnUserStepped(bool isSuccess, bool isHitted);
+	void PrepareBoard1(eBoard board1);
+	void PrepareBoard2(eBoard board2);
 
 	eUser*		user1 = nullptr;
 	eUser*		user2 = nullptr;
