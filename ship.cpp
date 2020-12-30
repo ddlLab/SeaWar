@@ -148,7 +148,7 @@ void eShips::Update()
 }
 bool eShips::IsAnyAlive() const
 {
-	return std::any_of(cbegin(), cend(), [](const shared_ptr<eShip>& _ship)
+	return !std::all_of(cbegin(), cend(), [](const shared_ptr<eShip>& _ship)
 	{
 		return _ship->IsDead();
 	});
